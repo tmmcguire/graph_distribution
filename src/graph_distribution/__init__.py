@@ -34,6 +34,18 @@ def _lognormal_dist(rolls):
     return x, pdf
 
 def graph_rolls(rolls):
+    """
+    Return a Matplotlib Figure with the annotated histogram of rolls.
+
+    The histogram includes a display of the probability distribution
+    function for the following distributons corresponding to the data:
+
+    * Uniform distribution
+
+    * Normal distribution
+
+    * Lognormal distrbution
+    """
     bb = np.insert(_possible_values(rolls) + 0.5, 0, [0.0])
     hist, bins = np.histogram(rolls, bb)
     # Graph
