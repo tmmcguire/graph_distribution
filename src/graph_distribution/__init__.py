@@ -33,9 +33,14 @@ def _lognormal_dist(rolls):
     pdf = nd.pdf(x) * rolls.size
     return x, pdf
 
-def graph_rolls(rolls):
+def graph_rolls(rolls, shift=0):
     """
-    Return a Matplotlib Figure with the annotated histogram of rolls.
+    Return a Matplotlib Figure with the annotated histogram of `rolls`.
+
+    If `rolls` has zero elements, this function will throw an error. In
+    this case, set `shift` to 1, which shifts all values up one. All 
+    properties of the graph are preserved, but with each element one greater
+    than it should be.
 
     The histogram includes a display of the probability distribution
     function for the following distributons corresponding to the data:
@@ -46,12 +51,15 @@ def graph_rolls(rolls):
 
     * Lognormal distrbution
     """
+    rolls += shift
     bb = np.insert(_possible_values(rolls) + 0.5, 0, [0.0])
     hist, bins = np.histogram(rolls, bb)
     # Graph
     fig, ax = plt.subplots(1,1)
     ax.set_xlim([np.min(rolls) - 1, np.max(rolls) + 1])
     ax.set_ylim([0, np.max(hist) * 1.5])
+    if shift != 0:
+        ax.set_xlabel('Shifted by %d' % shift)
     # Uniform distribution
     ux, updf = _uniform_dist(rolls)
     _ = ax.plot(ux, updf, 'r-', label='Uniform')
