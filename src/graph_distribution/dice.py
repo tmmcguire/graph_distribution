@@ -1,7 +1,16 @@
 from numpy.random import default_rng
-# import numpy as np
-# import matplotlib.pyplot as plt
-# from scipy.stats import uniform, norm, lognorm
+
+def roll_dice(r, s):
+    """
+    Roll a dice with s sides r times.
+
+    Returns an array of length r containing the rolls.
+    """
+    return default_rng().integers(1, s+1, r)
+
+###=====================================
+
+### Combine dice by addition. (The normal thing to do.)
 
 def roll_ndice(n, r, s):
     """
@@ -9,9 +18,9 @@ def roll_ndice(n, r, s):
 
     Returns an array of length r containing the values.
     """
-    data = default_rng().integers(1, s+1, r)
+    data = roll_dice(r, s)
     for _ in range(1, n):
-        data = data + default_rng().integers(1, s+1, r)
+        data = data + roll_dice(r, s)
     return data
 
 def roll_nd6(n, r):
