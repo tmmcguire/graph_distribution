@@ -100,10 +100,21 @@ def cascade_nd6(n, r):
 ### Successes: roll a dice greater than m
 
 def successes(r, s, min=None):
+    """
+    Return r trials of (1 if value >= min) on s-sided dice.
+
+    By default, min = s.
+    """
     min = min if min is not None else s
     return (roll_dice(r, s) >= min) * 1
 
 def success_ndice(n, r, s, min=None):
+    """
+    Return r trials of the number of successes on n s-sided dice.
+
+    A success is greater than or equal to min, default s (the maximum number
+    on a dice).
+    """
     data = successes(r, s, min)
     for _ in range(1, n):
         data = data + successes(r, s, min)
