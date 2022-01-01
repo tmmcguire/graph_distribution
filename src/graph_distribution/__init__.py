@@ -58,6 +58,7 @@ def graph_rolls(rolls, shift=0):
     fig, ax = plt.subplots(1,1)
     ax.set_xlim([np.min(rolls) - 1, np.max(rolls) + 1])
     ax.set_ylim([0, np.max(hist) * 1.5])
+    ax.yaxis.set_major_formatter(lambda y, pos: '{:2}%'.format(100 * y / rolls.size))
     if shift != 0:
         ax.set_xlabel('Shifted by %d' % shift)
     # Uniform distribution
