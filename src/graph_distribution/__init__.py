@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import uniform, norm, lognorm
 
-from . dice import roll_nd6
+from . dice import *
 
 def _possible_values(rolls):
     min = np.min(rolls)
